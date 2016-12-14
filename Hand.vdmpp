@@ -1,6 +1,5 @@
-class Board
+class Hand
 types
-
 -- TODO Define types here
 values
 -- TODO Define values here
@@ -12,4 +11,4 @@ functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Board
+end Hand

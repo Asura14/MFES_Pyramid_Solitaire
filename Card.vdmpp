@@ -1,18 +1,41 @@
 class Card
 types
+	public CardID = token;
 	public Suit = <diamonds>|<clubs>|<hearts>|<spades>;
-	public Rank = <A>|<Two>|<Three>|<Four>|<Five>|<Six>|<Seven>|<Eight>|<Nine>|<Ten>|<J>|<Q>|<K>;
+	--public Rank = <A>|<Two>|<Three>|<Four>|<Five>|<Six>|<Seven>|<Eight>|<Nine>|<Ten>|<J>|<Q>|<K>;
+
 	--public Value = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 -- TODO Define types here
 values
--- TODO Define values here
-instance variables
-	suit : Suit;
-	rank : Rank;
 	
--- TODO Define instance variables here
+instance variables
+id : CardID;
+suit : Suit;
+value : nat;
+
 operations
--- TODO Define operations here
+public Card : CardID * Suit * nat ==> Card
+Card(cardid, nsuit, nvalue) ==
+   atomic(
+   		id := cardid;
+      suit := nsuit;
+      value := nvalue;
+   )
+pre
+   (nvalue >= 1 and nvalue <= 13);
+
+public pure getID : () ==> CardID
+getID() ==
+   return id;
+
+public pure getSuit : () ==> Suit
+getSuit() ==
+   return suit;
+
+public pure getValue : () ==> nat
+getValue() ==
+   return value;
+
 functions
 -- TODO Define functiones here
 traces
