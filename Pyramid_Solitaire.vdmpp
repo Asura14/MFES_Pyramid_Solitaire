@@ -6,9 +6,69 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+	public deck: Deck;
+	public board: Board;
+	public hand: Hand;
+	private gameOver: bool := false;
+
 operations
--- TODO Define operations here
+
+public Pyramid_Solitaire : () ==> Pyramid_Solitaire
+	Pyramid_Solitaire() ==
+		(
+			IO`print("\n");
+			IO`print("Welcome to this very nice game where you play the very nice game, it is nice");
+			IO`print("\n");
+			IO`print("\n");
+			
+			gameCycle();
+			
+			IO`print("\n");
+			IO`print("Congratulations!");
+			IO`print("\n");
+			return self;
+		);
+
+public gameCycle: () ==> ()
+	gameCycle() == 
+	(
+	deck := new Deck();
+	board := new Board(deck);
+	hand := new Hand(deck);
+	while (gameOver = false) do 
+		(
+		
+		if len board.cards = 0 then gameOver := true;
+		)
+);
+	
+public shuffleDeck: () ==> ()
+	shuffleDeck() == 
+	(
+			dcl newIndex : nat1;
+    	dcl tempCard : Card;
+    	
+    	for index = 1 to 100 do 
+    	(
+    		tempCard := deck.cards(index);
+    		newIndex := MATH`rand(52) + 1;
+    		deck.cards(index) := deck.cards(newIndex);
+    		deck.cards(newIndex) := tempCard;
+    	);
+	)
+	post len deck.cards = 52;
+	
+public selectCard: nat * nat ==> Card
+	selectCard(row, col) == (
+		if row = 0 then (
+			return hand.selectCard();
+		);
+		if row > 0 then (
+			return board.selectCard(col, row); 
+		);
+		return new Card(0,'N',0)
+	);
+	
 functions
 -- TODO Define functiones here
 traces

@@ -5,10 +5,33 @@ values
 -- TODO Define values here
 instance variables
 -- TODO Define instance variables here
-public cards: seq of Card := [];
-
+public cards : seq of Card;
+public newCard : Card;
 operations
--- TODO Define operations here
+
+public Deck: () ==> Deck
+			Deck() == (
+				cards := []; 
+
+				for nvalue = 1 to 13 do
+				(
+					newCard := new Card(nvalue, 'S', nvalue);
+					cards := cards ^ [newCard];
+					newCard := new Card(nvalue + 13, 'C', nvalue);
+					cards := cards ^ [newCard];
+					newCard := new Card(nvalue + 26, 'H', nvalue);
+					cards := cards ^ [newCard];
+					newCard := new Card(nvalue + 39, 'D', nvalue);	
+					cards := cards ^ [newCard];
+				);
+				return self;
+			)
+post len cards = 52;
+
+public printDeck: () ==> ()
+		printDeck() == ( IO`print(cards); )
+
+
 functions
 -- TODO Define functiones here
 traces
