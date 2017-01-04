@@ -1,0 +1,24 @@
+class TestAll is subclass of MyTestCase
+
+types
+
+values
+
+instance variables
+
+operations
+    
+  public static main: () ==> ()
+  main() ==
+  (
+    dcl boardTest : CardTest := new CardTest();
+    dcl solitaireTest : SolitaireTest := new SolitaireTest();
+    boardTest.runTests();
+    solitaireTest.runTests();
+  );
+               
+functions
+
+traces
+
+end TestAll

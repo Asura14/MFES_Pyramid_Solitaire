@@ -51,9 +51,8 @@ operations
 	public checkFree : nat * nat ==> bool
 		checkFree(row, col) == 
 		(
-			if row = 7 then return true;
-			if checkCardAtCoor(row + 1, col) = false then (
-				if checkCardAtCoor(row+1, col+1) = false then return true;
+			if checkCardAtCoor(row + 1, col) = true then (
+				if checkCardAtCoor(row+1, col+1) = true then return true;
 			);
 			return false
 		)
