@@ -7,6 +7,7 @@ values
 instance variables
 	public cards : seq of Card;
 	public newCard : Card;
+	inv len cards = 52;
 
 operations
 
