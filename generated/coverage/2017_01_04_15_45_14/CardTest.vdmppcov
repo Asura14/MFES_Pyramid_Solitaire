@@ -1,0 +1,53 @@
+class CardTest is subclass of MyTestCase
+types
+
+values
+
+instance variables
+	private deck: Deck := new Deck();
+	private board: Board := new Board(deck);
+	private hand: Hand := new Hand(deck);
+	
+operations
+	private testBoard: () ==> ()
+	testBoard() ==
+	(
+		assertEqual(28, len board.cards); 
+		for index = 1 to len board.cards do
+		(
+			dcl tempCard: Card := deck.cards(index);
+			assertTrue(tempCard.getValue() > 0);
+			assertTrue(tempCard.getSuit() = 'S' or tempCard.getSuit() = 'C' or tempCard.getSuit() = 'D' or tempCard.getSuit() = 'H');
+		)
+	);
+	
+	private testDeck: () ==> ()
+	testDeck() ==
+	(
+		assertEqual(52, len deck.cards);
+	);
+	
+	private testHand: () ==> ()
+	testHand() ==
+	(
+		assertEqual(24, len hand.cards);
+		for index = 1 to len hand.cards do
+		(
+			dcl tempCard: Card := hand.cards(index);
+			assertTrue(tempCard.getValue() > 0);
+			assertTrue(tempCard.getSuit() = 'S' or tempCard.getSuit() = 'C' or tempCard.getSuit() = 'D' or tempCard.getSuit() = 'H');
+		)
+	);
+	
+	public runTests: () ==> ()
+	runTests() ==
+	(
+		testBoard();
+		testDeck();
+		testHand();
+	);
+functions
+
+traces
+
+end CardTest

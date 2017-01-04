@@ -1,76 +1,80 @@
---Initialize and control game
 class Pyramid_Solitaire
 
 types
--- TODO Define types here
+
 values
--- TODO Define values here
+
 instance variables
-	public deck: Deck;
-	public board: Board;
-	public hand: Hand;
+	private deck: Deck;
+	private board: Board;
+	private hand: Hand;
 	private gameOver: bool := false;
+	private boardOver: bool := false;
 
 operations
 
-public Pyramid_Solitaire : () ==> Pyramid_Solitaire
-	Pyramid_Solitaire() ==
+	public Pyramid_Solitaire : () ==> Pyramid_Solitaire
+		Pyramid_Solitaire() ==
+			(
+				deck := new Deck();
+				deck.shuffleDeck();
+				board := new Board(deck);
+				hand := new Hand(deck);
+			);
+	
+	public gameCycle : () ==> ()
+		gameCycle() == 
 		(
-			IO`print("\n");
-			IO`print("Welcome to this very nice game where you play the very nice game, it is nice");
-			IO`print("\n");
-			IO`print("\n");
-			
-			gameCycle();
-			
-			IO`print("\n");
-			IO`print("Congratulations!");
-			IO`print("\n");
-			return self;
+		while (gameOver = false) do 
+			(
+				
+				
+				boardOver := isBoardOver();
+				--gameOver := isGameOver();
+			)
 		);
-
-public gameCycle: () ==> ()
-	gameCycle() == 
-	(
-	deck := new Deck();
-	board := new Board(deck);
-	hand := new Hand(deck);
-	while (gameOver = false) do 
-		(
 		
-		if len board.cards = 0 then gameOver := true;
+	public selectCard : nat * nat ==> Card
+		selectCard(row, col) == (
+			if row = 0 then (
+				return hand.selectCard();
+			);
+			if row > 0 then (
+				return board.selectCard(col, row); 
+			);
+			return new Card(0,'N',0)
+		);
+		
+	public isBoardOver : () ==> bool
+		isBoardOver() == (
+			if board.cards(1) = new Card(0,'N',0) then return true
+			else return false
 		)
-);
-	
-public shuffleDeck: () ==> ()
-	shuffleDeck() == 
-	(
-			dcl newIndex : nat1;
-    	dcl tempCard : Card;
-    	
-    	for index = 1 to 100 do 
-    	(
-    		tempCard := deck.cards(index);
-    		newIndex := MATH`rand(52) + 1;
-    		deck.cards(index) := deck.cards(newIndex);
-    		deck.cards(newIndex) := tempCard;
-    	);
-	)
-	post len deck.cards = 52;
-	
-public selectCard: nat * nat ==> Card
-	selectCard(row, col) == (
-		if row = 0 then (
-			return hand.selectCard();
+	pre len board.cards = 28;
+		
+	public isGameOver : int * int ==> bool
+		isGameOver(row, col) == (
+			if row = -1 and col = -1 then return true
+			else return false
 		);
-		if row > 0 then (
-			return board.selectCard(col, row); 
-		);
-		return new Card(0,'N',0)
-	);
+		
+	public pure getDeck : () ==> Deck
+		getDeck() == return deck;
+		
+	public pure getBoard : () ==> Board
+		getBoard() == return board;
+		
+	public pure getHand : () ==> Hand
+		getHand() == return hand;
 	
+	public pure getGameOver : () ==> bool
+	getGameOver() == return gameOver;
+	
+	public pure getBoardOver : () ==> bool
+	getBoardOver() == return boardOver;
+
 functions
--- TODO Define functiones here
+
 traces
--- TODO Define Combinatorial Test Traces here
+
 end Pyramid_Solitaire

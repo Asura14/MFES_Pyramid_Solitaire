@@ -1,0 +1,60 @@
+class SolitaireTest is subclass of MyTestCase
+
+types
+
+values
+
+instance variables
+	private pyramid: Pyramid_Solitaire := new Pyramid_Solitaire();
+	
+operations
+	private testInitPyramid: () ==> ()
+	testInitPyramid() ==
+	(
+		assertEqual(false, pyramid.getGameOver()); 
+		assertEqual(false, pyramid.getBoardOver()); 
+	);
+	
+	private testRemoveFromBoard: () ==> ()
+	testRemoveFromBoard() == 
+	(
+		dcl index: nat := pyramid.getBoard().getCardIndex(1, 1);
+		assertTrue(pyramid.getBoard().cards(index).getValue() > 0);
+		pyramid.getBoard().removeCard(1, 1);
+		assertTrue(pyramid.getBoard().cards(index).getValue() = 0);
+	);
+	
+	private testRemoveFromHand: () ==> ()
+	testRemoveFromHand() == 
+	(
+		dcl tempCard: Card := pyramid.getHand().getTopCard();
+		assertTrue(tempCard.getValue() > 0);
+		pyramid.getHand().removeCard();
+		assertTrue(pyramid.getHand().getTopCard().getValue() <> tempCard.getValue());
+	);
+	
+	private testNextCardFromHand: () ==> ()
+	testNextCardFromHand() == 
+	(
+		dcl tempCard: Card := pyramid.getHand().getTopCard();
+		assertTrue(tempCard.getValue() > 0);
+		IO`println(tempCard);
+		pyramid.getHand().nextCard();
+		assertTrue(pyramid.getHand().getTopCard().getValue() <> tempCard.getValue() and pyramid.getHand().getTopCard().getSuit() <> tempCard.getSuit());
+		IO`println(pyramid.getHand().getTopCard());
+	);
+	
+	public runTests: () ==> ()
+	runTests() ==
+	(
+		testInitPyramid();
+		testRemoveFromBoard();
+		testRemoveFromHand();
+		testNextCardFromHand();
+	);
+
+functions
+
+traces
+
+end SolitaireTest

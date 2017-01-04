@@ -1,0 +1,24 @@
+class TestAll is subclass of MyTestCase
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+
+operations
+    
+    public static main: () ==> ()
+    main() ==
+    (
+            dcl board_test : CardTest := new CardTest();
+            board_test.runTests();
+    );
+                
+    
+              
+               
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end TestAll
